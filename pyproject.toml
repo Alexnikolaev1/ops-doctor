@@ -1,0 +1,51 @@
+[project]
+name = "ops-doctor-mcp"
+version = "0.1.0"
+description = "Weak-host preflight: hard RAM/CPU/disk gates plus Echo shape warnings before heavy agent work."
+requires-python = ">=3.10"
+dependencies = [
+    "mcp>=1.9.0,<2.0.0",
+    "psutil>=5.9.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-cov>=5.0.0",
+    "hypothesis>=6.100.0",
+    "black>=24.0.0",
+    "ruff>=0.6.0",
+    "mypy>=1.11.0",
+    "radon>=6.0.0",
+]
+
+[project.scripts]
+ops-doctor-mcp = "ops_doctor.presentation.mcp_server:main"
+
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+ops_doctor = ["py.typed"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.coverage.run]
+source = ["ops_doctor"]
+omit = [
+    "martin_*.py",
+    "tests/*",
+]
+
+[tool.coverage.report]
+fail_under = 90
+show_missing = true
+
+[tool.black]
+target-version = ["py314"]
