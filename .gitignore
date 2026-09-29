@@ -12,3 +12,10 @@ venv/
 dist/
 build/
 .mutmut-cache/
+
+.env
+.env.*
+!.env.example
+*-credentials.json
+token.json
+
